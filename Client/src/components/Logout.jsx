@@ -13,12 +13,14 @@ const LogoutButton = () => {
   };
 
   return (
-    <button
-      onClick={handleLogout}
-      className="bg-blue-700 rounded-lg text-white p-2 m-3 hover:bg-blue-800 transition duration-200"
-    >
-      Logout
-    </button>
+    <div className="flex justify-end">
+      <button
+        onClick={handleLogout}
+        className="bg-blue-700 rounded-lg text-white p-2 m-3 hover:bg-blue-800 transition duration-200 "
+      >
+        Logout
+      </button>
+    </div>
   );
 };
 

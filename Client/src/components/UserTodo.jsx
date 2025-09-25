@@ -36,9 +36,9 @@ const UserTodos = () => {
       </h2>
 
       {/* Todo Form */}
-      <div className="max-w-md mx-auto mb-8">
+      {/* <div className="max-w-md mx-auto mb-8">
         <TodoForm onTodoCreated={fetchTodos} />
-      </div>
+      </div> */}
 
       {/* Todos List */}
       <div className="max-w-4xl mx-auto">

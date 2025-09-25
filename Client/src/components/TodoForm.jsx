@@ -7,6 +7,7 @@ const TodoForm = ({ onTodoCreated }) => {
     description: "",
     dueDate: "",
     category: "",
+    user: { role: "" },
   });
 
   const handleCreate = async () => {
@@ -18,8 +19,14 @@ const TodoForm = ({ onTodoCreated }) => {
     try {
       await createTodo(todo);
       alert("Todo created successfully");
-      onTodoCreated(); // Refresh the list
-      setTodo({ title: "", description: "", dueDate: "", category: "" });
+      onTodoCreated();
+      setTodo({
+        title: "",
+        description: "",
+        dueDate: "",
+        category: "",
+        user: { role: "" },
+      });
     } catch (err) {
       alert(err.response?.data?.message || "Failed to create todo");
       console.log(err);
@@ -72,6 +79,21 @@ const TodoForm = ({ onTodoCreated }) => {
           placeholder="Work, Personal, etc."
           value={todo.category}
           onChange={(e) => setTodo({ ...todo, category: e.target.value })}
+          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
+
+      <div className="mb-6">
+        <label className="block text-gray-700 font-medium mb-2">
+          User Role
+        </label>
+        <input
+          type="text"
+          placeholder="admin / user"
+          value={todo.user.role}
+          onChange={(e) =>
+            setTodo({ ...todo, user: { ...todo.user, role: e.target.value } })
+          }
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>

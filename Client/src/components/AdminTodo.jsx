@@ -30,7 +30,9 @@ const AdminTodos = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Admin Todos</h2>
+      <h2 className="text-xl font-bold mb-4 text-center text-blue-700">
+        Admin Todos
+      </h2>
       <ul>
         {todos.map((todo) => (
           <li key={todo._id} className="mb-2">
@@ -45,6 +47,11 @@ const AdminTodos = () => {
             </button>
           </li>
         ))}
+        {todos.length === 0 && (
+          <p className="col-span-full text-center text-gray-500 mt-4">
+            No todos available. Create one !
+          </p>
+        )}
       </ul>
     </div>
   );
