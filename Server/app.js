@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const methodOverride = require("method-override");
+
+app.use(methodOverride("_method"));
 
 const { router: userRoutes } = require("./routes/users");
 const todoRoutes = require("./routes/todos");

@@ -106,13 +106,15 @@ router.put("/admin/:id", async (req, res) => {
 // Delete todo by user
 router.delete("/user/:id", async (req, res) => {
   const { id } = req.params;
+  console.log(id);
+
   try {
     const todo = await Todos.findById(id).populate("user");
     if (!todo) return res.status(404).json({ message: "Todo not found" });
     if (todo.user.role !== "user")
       return res.status(403).json({ message: "Unauthorized" });
 
-    await todo.remove();
+    await todo.deleteOne();
     res.json({ message: "Todo deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: "Server Error" });

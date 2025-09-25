@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.0",
+    "method-override": "^2.0.0",
     "mongoose": "^8.18.2",
     "nodemon": "^3.1.10"
   }
