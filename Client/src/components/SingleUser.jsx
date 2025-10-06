@@ -21,8 +21,8 @@ const SingleUser = () => {
         */
       let tododata = await getSingleTodo(params.id);
       console.log("todo data is ", tododata);
-      console.log(localStorage.getItem("token"));
-      localStorage.removeItem("token");
+      // console.log(localStorage.getItem("token"));
+      // localStorage.removeItem("token");
       setTodo(tododata.data);
       // console.log(tododata.data);
       // console.log(tododata._id);
