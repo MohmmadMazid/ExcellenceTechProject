@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getUserTodos, deleteUserTodo } from "../todo/todoapi";
+import { getUserTodos, deleteUserTodo, getSingleTodo } from "../todo/todoapi";
 import TodoForm from "./TodoForm";
-
+import { Link, Outlet } from "react-router-dom";
 const UserTodos = () => {
   const [todos, setTodos] = useState([]);
 
@@ -71,6 +71,12 @@ const UserTodos = () => {
               >
                 Delete
               </button>
+              <button
+                onClick={() => getSingleTodo(todo._id)}
+                className="ml-3 bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition self-start"
+              >
+                <Link to={`singleTodo/${todo._id}`}>check</Link>
+              </button>
             </div>
           ))}
 
@@ -81,6 +87,7 @@ const UserTodos = () => {
           )}
         </div>
       </div>
+      {/* <Outlet /> */}
     </div>
   );
 };

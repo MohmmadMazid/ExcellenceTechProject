@@ -25,6 +25,20 @@ router.get("/user", handleLoginCheck, async (req, res) => {
   }
 });
 
+// single User details
+
+router.get("/user/:id", async (req, res) => {
+  try {
+    console.log(req.params.id);
+    let { id } = req.params;
+    let todo = await Todos.findById(id);
+    console.log(todo);
+    res.json(todo);
+  } catch (err) {
+    console.log("some errro accured ", err);
+  }
+});
+
 // Get todos for admin role
 router.get("/admin", handleLoginCheck, async (req, res) => {
   try {

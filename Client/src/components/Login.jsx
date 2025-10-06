@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { loginUser } from "../user/userapi";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -10,6 +12,7 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       alert("Login successful");
       // JWT is in cookie, no need to save in localStorage unless you want
+      navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
     }

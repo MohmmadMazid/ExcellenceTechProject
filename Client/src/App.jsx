@@ -9,6 +9,8 @@ import Logout from "./components/Logout";
 
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./Navbar";
+import SingleUser from "./components/SingleUser";
+import UpdateUser from "./components/UpdateUser";
 
 function App() {
   return (
@@ -22,9 +24,12 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/userTodos" element={<UserTodos />} />
+        <Route path="userTodos/singleTodo/:id" element={<SingleUser />} />
+        <Route path="userTodo/update/:id" element={<UpdateUser />} />
         <Route path="/adminTodos" element={<AdminTodos />} />
         <Route path="/todoForm" element={<TodoForm />} />
-        <Route path="logout" element={<Logout />} />
+        <Route path="/logout" element={<Logout />} />
+        {/* <Route path="/userTodo" element={<UserTodo />} /> */}
         <Route path="*" element={<h2>404: Page Not Found</h2>} />
       </Routes>
     </div>

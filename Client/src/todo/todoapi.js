@@ -18,6 +18,10 @@ export const createTodo = (todoData) => API.post("/", todoData);
 export const updateUserTodo = (id, updateData) =>
   API.put(`/user/${id}`, updateData);
 
+// get single User
+
+export const getSingleTodo = (id) => API.get(`user/${id}`);
+
 // Update todo as admin
 export const updateAdminTodo = (id, updateData) =>
   API.put(`/admin/${id}`, updateData);
