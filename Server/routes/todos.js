@@ -118,23 +118,25 @@ router.put("/admin/:id", async (req, res) => {
 });
 
 // Delete todo by user
-router.delete("/user/:id", async (req, res) => {
+router.delete("/user/:id", handleLoginCheck, async (req, res) => {
   const { id } = req.params;
-  console.log(id);
 
   try {
     const todo = await Todos.findById(id).populate("user");
     if (!todo) return res.status(404).json({ message: "Todo not found" });
-    if (todo.user.role !== "user")
-      return res.status(403).json({ message: "Unauthorized" });
 
-    await todo.deleteOne();
+    // Check if the user is authorized to delete
+    if (todo.user.username !== req.user.username || todo.user.role !== "user") {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    await todo.deleteOne({ "todo.user.username": req.user.username });
     res.json({ message: "Todo deleted successfully" });
   } catch (err) {
+    console.error("Delete error:", err);
     res.status(500).json({ message: "Server Error" });
   }
 });
-
 // Delete todo by admin
 router.delete("/admin/:id", async (req, res) => {
   const { id } = req.params;
@@ -148,6 +150,26 @@ router.delete("/admin/:id", async (req, res) => {
     res.json({ message: "Todo deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: "Server Error" });
+  }
+});
+
+router.get("/search", async (req, res) => {
+  const { title } = req.query;
+
+  try {
+    const todos = await Todos.find({
+      $and: [
+        {
+          title: { $regex: title, $options: "i" },
+        },
+      ],
+    }).populate("user");
+
+    console.log(todos);
+    res.status(200).json({ data: todos });
+  } catch (err) {
+    console.error("Search error:", err);
+    res.status(500).json({ error: "Something went wrong during search" });
   }
 });
 

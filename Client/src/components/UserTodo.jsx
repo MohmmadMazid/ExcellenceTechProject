@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getUserTodos, deleteUserTodo, getSingleTodo } from "../todo/todoapi";
 import TodoForm from "./TodoForm";
 import { Link, Outlet } from "react-router-dom";
+import SearchTodo from "./SearchTodo";
 const UserTodos = () => {
   const [todos, setTodos] = useState([]);
 
@@ -42,6 +43,7 @@ const UserTodos = () => {
 
       {/* Todos List */}
       <div className="max-w-4xl mx-auto">
+        <SearchTodo handleDelete={handleDelete} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {todos.map((todo) => (
             <div
