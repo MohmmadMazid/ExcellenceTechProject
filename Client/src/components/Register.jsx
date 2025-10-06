@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { registerUser } from "../user/userapi";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ username: "", email: "", password: "" });
 
   const handleSubmit = async () => {
+    let token = localStorage.getItem("token");
     try {
-      await registerUser(form);
-      alert("Registration successful");
-      setForm({ username: "", email: "", password: "" });
+      if (!token) {
+        await registerUser(form);
+        alert("Registration successful");
+        setForm({ username: "", email: "", password: "" });
+        navigate("/");
+      } else {
+        alert("for new registration first you need to logged out!");
+      }
     } catch (err) {
       alert(err.response?.data?.message || "Registration failed");
     }

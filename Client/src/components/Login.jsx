@@ -5,16 +5,22 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-
+  const token = localStorage.getItem("token");
   const handleLogin = async () => {
-    try {
-      const res = await loginUser(form);
-      localStorage.setItem("token", res.data.token);
-      alert("Login successful");
-      // JWT is in cookie, no need to save in localStorage unless you want
-      navigate("/");
-    } catch (err) {
-      alert(err.response?.data?.message || "Login failed");
+    if (!token) {
+      try {
+        const res = await loginUser(form);
+        console.log("login response", res);
+        localStorage.setItem("token", res.data.token);
+        alert("Login successful");
+        // JWT is in cookie, no need to save in localStorage unless you want
+        navigate("/");
+      } catch (err) {
+        alert(err.response?.data?.message || "Login failed");
+      }
+    } else {
+      alert("you are allready loggedIn !");
+      navigate(-1);
     }
   };
 

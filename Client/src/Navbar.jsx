@@ -1,9 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutUser } from "./user/userapi";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  let tokenValue = localStorage.getItem("token");
+  let [token, setToken] = useState(tokenValue);
+  console.log("token check inside the navbar component ", token);
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      // let token = localStorage.getItem("token");
+      if (token) {
+        alert("use logged Out");
+        // localStorage.removeItem("token");
+        let removeToken = localStorage.removeItem("token");
+        setToken(removeToken);
+      } else {
+        alert("you are allready logged out , now you need to logein !");
+        navigate("/login");
+      }
+    } catch (err) {
+      alert("user not Logged out successfully", err);
+    }
+  };
+
   return (
-    <nav className="bg-indigo-600 text-white px-10 py-4 shadow-md">
+    <nav className="sticky top-0 z-100 bg-indigo-600 text-white px-10 py-4 shadow-md  ">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">TodoApp</h1>
 
@@ -28,21 +51,36 @@ const Navbar = () => {
               Admin Todos
             </Link>
           </li>
-          <li>
-            <Link to="/register" className="hover:text-gray-200 transition">
-              Register
-            </Link>
-          </li>
-          <li>
-            <Link to="/login" className="hover:text-gray-200 transition">
-              Login
-            </Link>
-          </li>
-          <li>
+
+          {token ? (
+            <li>
+              <button
+                onClick={handleLogout}
+                className="hover:text-gray-200 transition"
+              >
+                Logout
+              </button>
+            </li>
+          ) : (
+            <>
+              <li>
+                <Link to="/register" className="hover:text-gray-200 transition">
+                  Register
+                </Link>
+              </li>
+              <li>
+                <Link to="/login" className="hover:text-gray-200 transition">
+                  Login
+                </Link>
+              </li>
+            </>
+          )}
+
+          {/* <li>
             <Link to="/logout" className="hover:text-gray-200 transition">
               Logout
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </nav>
