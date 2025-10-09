@@ -5,46 +5,44 @@ import { Link } from "react-router-dom";
 const SearchTodo = ({ handleDelete }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [todos, setTodos] = useState([]);
-  console.log(searchQuery);
 
   const handleSearch = async () => {
-    let fetching = await fetch(
+    const res = await fetch(
       `http://localhost:5000/api/todos/search?title=${encodeURIComponent(
         searchQuery
       )}`
     );
-    let getdata = await fetching.json();
-    setTodos(getdata.data);
-    // console.log(data);
+    const data = await res.json();
+    setTodos(data.data);
   };
+
   return (
-    <div className="flex flex-col justify-center items-center m-10 bg-white p-10 rounded-lg shadow-lg">
-      <div>
-        <h1 className="text-xl font-bold text-center mb-10 ">Search Todo</h1>
-      </div>
-      <div className="flex flex-col justify-center items-center">
+    <div className=" rounded-2xl bg-white active:outline-1 active:outline-blue-200">
+      <h1 className="text-2xl sm:text-3xl font-bold text-center mb-8">
+        Search Todo
+      </h1>
+
+      <div className="w-full flex flex-col items-center space-y-4 sm:space-y-6 mb-8 px-4">
         <input
           onChange={(e) => setSearchQuery(e.target.value)}
           type="text"
-          placeholder="search todo"
-          className="border-1 p-3 w-100 rounded-2xl text-center border-gray-300 focus:outline-1 outline-offset-1 outline-green-200 text-xl tracking-wide "
-        ></input>
-        <br />
-        <br />
+          placeholder="Search todo"
+          className="w-full max-w-lg px-4 py-3 border border-gray-300 rounded-lg text-base tracking-wide focus:ring-2 focus:ring-green-400 focus:outline-none"
+        />
+
         <button
-          className="border-2 p-2 w-50 text-xl rounded-2xl  border-blue-900  outline-1 outline-blue-700
-            bg-blue-700 outline-offset-0 hover:bg-blue-600 cursor-pointer text-white font-bold
-          "
           onClick={handleSearch}
+          className="bg-blue-600 text-white px-6 py-2 rounded-lg text-base sm:text-lg font-medium hover:bg-blue-500 transition"
         >
-          submit
+          Submit
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full px-4">
         {todos.map((todo) => (
           <div
             key={todo._id}
-            className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition flex justify-between items-start"
+            className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition flex flex-col justify-between"
           >
             <div>
               <h3 className="text-lg font-semibold text-gray-800">
@@ -63,18 +61,19 @@ const SearchTodo = ({ handleDelete }) => {
               )}
             </div>
 
-            <button
-              onClick={() => handleDelete(todo._id)}
-              className="ml-3 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition self-start"
-            >
-              Delete
-            </button>
-            <button
-              onClick={() => getSingleTodo(todo._id)}
-              className="ml-3 bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition self-start"
-            >
-              <Link to={`singleTodo/${todo._id}`}>check</Link>
-            </button>
+            <div className="flex space-x-2 mt-4">
+              <button
+                onClick={() => handleDelete(todo._id)}
+                className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition"
+              >
+                Delete
+              </button>
+              <Link to={`singleTodo/${todo._id}`}>
+                <button className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition">
+                  Check
+                </button>
+              </Link>
+            </div>
           </div>
         ))}
 

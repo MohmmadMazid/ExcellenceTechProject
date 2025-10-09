@@ -30,7 +30,7 @@ const Homepage = () => {
       </div>
 
       {/* Feature Section */}
-      <div className="mt-16 grid grid-cols-3 gap-8 max-w-4xl">
+      <div className="mt-16 flex flex-col md:flex-row justify-between gap-6 md:gap-8 max-w-6xl mx-auto px-4">
         <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
           <h3 className="text-xl font-semibold text-indigo-600 mb-2">
             Easy to Use

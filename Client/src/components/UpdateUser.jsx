@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSingleTodo, updateUserTodo } from "../todo/todoapi";
+import { toast } from "react-toastify";
 
 const UpdateUser = () => {
   const params = useParams();
   const navigate = useNavigate();
   let id = params.id;
   const [todo, setTodo] = useState({
-    category: "",
-    completedStatues: false,
-    description: "",
-    dueData: Date.now(),
     title: "",
+    description: "",
+    category: "",
+    dueData: Date.now(),
+    completedStatues: false,
   });
   console.log("params are ", params);
 
@@ -34,10 +35,17 @@ const UpdateUser = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    await updateUserTodo(todo._id, todo);
-    alert("todo updated successfully");
-    navigate("/userTodos");
+    try {
+      e.preventDefault();
+
+      await updateUserTodo(todo._id, todo);
+      // alert("todo updated successfully");
+      toast.success("todo updated successfully");
+      navigate("/userTodos");
+    } catch (error) {
+      console.log(error);
+      toast.error("failed to update todo");
+    }
   };
   return (
     <div
@@ -47,7 +55,7 @@ const UpdateUser = () => {
     >
       <div className="w-full max-w-md justify-center  bg-white rounded-xl  shadow-lg p-8">
         <h1 className="text-2xl font-bold text-center text-indigo-600 mb-6">
-          Updating User details and This is also the prefilled form
+          Update Todo Data
         </h1>
         <form
           onSubmit={handleSubmit}

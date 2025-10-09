@@ -1,13 +1,16 @@
 import React from "react";
 import { logoutUser } from "../user/userapi";
+import { toast } from "react-toastify";
 
 const LogoutButton = () => {
   const handleLogout = async () => {
     try {
       await logoutUser();
-      alert("Logged out");
+      // alert("Logged out");
+      toast.success("you are logged out successfully");
     } catch (err) {
-      alert("Logout failed");
+      // alert("Logout failed");
+      toast.success("failed to logged out");
       console.log(err);
     }
   };

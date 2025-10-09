@@ -11,10 +11,13 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./Navbar";
 import SingleUser from "./components/SingleUser";
 import UpdateUser from "./components/UpdateUser";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <div>
+      <ToastContainer />
       <div>
         <Navbar />
       </div>

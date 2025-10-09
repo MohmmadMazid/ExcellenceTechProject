@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getUserTodos, deleteUserTodo, getSingleTodo } from "../todo/todoapi";
-import TodoForm from "./TodoForm";
-import { Link, Outlet } from "react-router-dom";
+import { getUserTodos, deleteUserTodo } from "../todo/todoapi";
+import { Link } from "react-router-dom";
 import SearchTodo from "./SearchTodo";
+// import TodoForm from "./TodoForm"; // Uncomment if needed
+import { toast } from "react-toastify";
+
 const UserTodos = () => {
   const [todos, setTodos] = useState([]);
 
@@ -12,17 +14,19 @@ const UserTodos = () => {
       setTodos(res.data);
     } catch (err) {
       alert("Failed to load todos");
-      console.log(err);
+      console.error(err);
     }
   };
 
   const handleDelete = async (id) => {
     try {
       await deleteUserTodo(id);
-      fetchTodos();
+      toast.success("todo deleted successfully");
+      fetchTodos(); // Refresh list after deletion
     } catch (err) {
-      alert("Failed to delete todo");
-      console.log(err);
+      // alert("Failed to delete todo");
+      toast.error("failed to delete todod");
+      console.error(err);
     }
   };
 
@@ -31,24 +35,28 @@ const UserTodos = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <h2 className="text-3xl font-bold text-indigo-600 mb-6 text-center">
+    <div className="min-h-screen bg-gray-100 p-4 sm:p-6 md:p-8">
+      <h2 className="text-2xl sm:text-3xl font-bold text-indigo-600 mb-6 text-center">
         User Todos
       </h2>
 
-      {/* Todo Form */}
-      {/* <div className="max-w-md mx-auto mb-8">
+      {/* Optional Todo Form */}
+      {/* <div className="max-w-xl mx-auto mb-8">
         <TodoForm onTodoCreated={fetchTodos} />
       </div> */}
 
-      {/* Todos List */}
-      <div className="max-w-4xl mx-auto">
+      {/* Search Todo */}
+      <div className="max-w-5xl mx-auto mb-8 px-4">
         <SearchTodo handleDelete={handleDelete} />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      </div>
+
+      {/* Todos List */}
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {todos.map((todo) => (
             <div
               key={todo._id}
-              className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition flex justify-between items-start"
+              className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition flex flex-col justify-between"
             >
               <div>
                 <h3 className="text-lg font-semibold text-gray-800">
@@ -67,18 +75,20 @@ const UserTodos = () => {
                 )}
               </div>
 
-              <button
-                onClick={() => handleDelete(todo._id)}
-                className="ml-3 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition self-start"
-              >
-                Delete
-              </button>
-              <button
-                onClick={() => getSingleTodo(todo._id)}
-                className="ml-3 bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition self-start"
-              >
-                <Link to={`singleTodo/${todo._id}`}>check</Link>
-              </button>
+              <div className="flex justify-between items-center mt-4">
+                <button
+                  onClick={() => handleDelete(todo._id)}
+                  className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition"
+                >
+                  Delete
+                </button>
+
+                <Link to={`singleTodo/${todo._id}`}>
+                  <button className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition">
+                    Check
+                  </button>
+                </Link>
+              </div>
             </div>
           ))}
 
@@ -89,7 +99,6 @@ const UserTodos = () => {
           )}
         </div>
       </div>
-      {/* <Outlet /> */}
     </div>
   );
 };

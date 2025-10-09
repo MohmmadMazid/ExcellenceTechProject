@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { loginUser } from "../user/userapi";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -12,14 +13,17 @@ const Login = () => {
         const res = await loginUser(form);
         console.log("login response", res);
         localStorage.setItem("token", res.data.token);
-        alert("Login successful");
+        // alert("Login successful");
+        toast.success("you are loggedIn successfully");
         // JWT is in cookie, no need to save in localStorage unless you want
         navigate("/");
       } catch (err) {
-        alert(err.response?.data?.message || "Login failed");
+        // alert(err.response?.data?.message || "Login failed");
+        toast.error("failed to loggedIn", err);
       }
     } else {
-      alert("you are allready loggedIn !");
+      // alert("you are allready loggedIn !");
+      toast.warning("you are allready loggedIn");
       navigate(-1);
     }
   };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createTodo } from "../todo/todoapi";
+import { toast } from "react-toastify";
 
 const TodoForm = ({ onTodoCreated }) => {
   const [todo, setTodo] = useState({
@@ -7,7 +8,7 @@ const TodoForm = ({ onTodoCreated }) => {
     description: "",
     dueDate: "",
     category: "",
-    user: { role: "" },
+    // user: { role: "" },
   });
 
   const handleCreate = async () => {
@@ -18,17 +19,20 @@ const TodoForm = ({ onTodoCreated }) => {
 
     try {
       await createTodo(todo);
-      alert("Todo created successfully");
+      // alert("Todo created successfully");
+      toast.success("todo created successfully");
       onTodoCreated();
       setTodo({
         title: "",
         description: "",
         dueDate: "",
         category: "",
-        user: { role: "" },
+        // user: { role: "" },
       });
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to create todo");
+      // alert(err.response?.data?.message || "Failed to create todo");
+      // toast.error(" failed to create todo !");
+
       console.log(err);
     }
   };
@@ -83,7 +87,9 @@ const TodoForm = ({ onTodoCreated }) => {
         />
       </div>
 
-      <div className="mb-6">
+      {/*
+           this is specify for the user role waether a user is admin or only user
+        <div className="mb-6">
         <label className="block text-gray-700 font-medium mb-2">
           User Role
         </label>
@@ -96,7 +102,7 @@ const TodoForm = ({ onTodoCreated }) => {
           }
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
-      </div>
+      </div> */}
 
       <button
         onClick={handleCreate}
