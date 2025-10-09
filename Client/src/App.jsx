@@ -14,6 +14,7 @@ import UpdateUser from "./components/UpdateUser";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DoneTodo from "./components/DoneTodo";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
         <Route path="/completedTodos" element={<DoneTodo />} />
         <Route path="*" element={<h2>404: Page Not Found</h2>} />
       </Routes>
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }
