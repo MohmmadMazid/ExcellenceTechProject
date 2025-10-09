@@ -32,7 +32,7 @@ const SearchTodo = ({ handleDelete }) => {
 
         <button
           onClick={handleSearch}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg text-base sm:text-lg font-medium hover:bg-blue-500 transition"
+          className="bg-blue-600 text-white px-6 py-2 rounded-lg text-base sm:text-lg font-medium hover:bg-blue-500 transition cursor-pointer"
         >
           Submit
         </button>
@@ -64,12 +64,12 @@ const SearchTodo = ({ handleDelete }) => {
             <div className="flex space-x-2 mt-4">
               <button
                 onClick={() => handleDelete(todo._id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition"
+                className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition cursor-pointer"
               >
                 Delete
               </button>
               <Link to={`singleTodo/${todo._id}`}>
-                <button className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition">
+                <button className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition cursor-pointer">
                   Check
                 </button>
               </Link>

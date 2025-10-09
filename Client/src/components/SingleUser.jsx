@@ -48,7 +48,7 @@ const SingleUser = () => {
         </div>
         <Link
           to={`/userTodo/update/${todo._id}`}
-          className="ml-16 border-1 rounded-lg p-1 flex flex-row justify-center w-100 bg-blue-700 text-white text-2xl hover:bg-blue-600 "
+          className="ml-16 border-1 rounded-lg p-1 flex flex-row justify-center w-100 bg-blue-700 text-white text-2xl hover:bg-blue-600 cursor-pointer"
         >
           update
         </Link>

@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { createTodo } from "../todo/todoapi";
 import { toast } from "react-toastify";
 
-const TodoForm = ({ onTodoCreated }) => {
+const TodoForm = () => {
   const [todo, setTodo] = useState({
     title: "",
     description: "",
     dueDate: "",
     category: "",
-    // user: { role: "" },
   });
 
   const handleCreate = async () => {
@@ -21,13 +20,12 @@ const TodoForm = ({ onTodoCreated }) => {
       await createTodo(todo);
       // alert("Todo created successfully");
       toast.success("todo created successfully");
-      onTodoCreated();
+      // onTodoCreated();
       setTodo({
         title: "",
         description: "",
         dueDate: "",
         category: "",
-        // user: { role: "" },
       });
     } catch (err) {
       // alert(err.response?.data?.message || "Failed to create todo");
@@ -106,7 +104,7 @@ const TodoForm = ({ onTodoCreated }) => {
 
       <button
         onClick={handleCreate}
-        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200"
+        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200 cursor-pointer"
       >
         ➕ Add Todo
       </button>

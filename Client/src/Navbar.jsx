@@ -94,6 +94,11 @@ const Navbar = () => {
                 Admin Todos
               </Link>
             </li>
+            <li>
+              <Link to="/completedTodos" className="hover:text-gray-200 transition">
+                Completed Todos
+              </Link>
+            </li>
             {token ? (
               <li>
                 <button

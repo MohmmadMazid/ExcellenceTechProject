@@ -13,6 +13,7 @@ import SingleUser from "./components/SingleUser";
 import UpdateUser from "./components/UpdateUser";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DoneTodo from "./components/DoneTodo";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/todoForm" element={<TodoForm />} />
         <Route path="/logout" element={<Logout />} />
         {/* <Route path="/userTodo" element={<UserTodo />} /> */}
+        <Route path="/completedTodos" element={<DoneTodo />} />
         <Route path="*" element={<h2>404: Page Not Found</h2>} />
       </Routes>
     </div>

@@ -18,13 +18,34 @@ const { handleLoginCheck } = require("./users");
 
 router.get("/user", handleLoginCheck, async (req, res) => {
   try {
-    const todos = await Todos.find({ user: req.user.userId });
+    const todos = await Todos.find({
+      $and: [{ user: req.user.userId }, { completedStatus: false }],
+    });
     res.json(todos);
   } catch (err) {
     res.status(500).json({ message: "Server Error" });
   }
 });
 
+// fetching all the completed task of loggedin User
+router.get("/user/completedTodos", handleLoginCheck, async (req, res) => {
+  try {
+    // console.log(req.user);
+    let data = await Todos.find({
+      $and: [{ completedStatus: true }, { user: req.user.userId }],
+    });
+    console.log(data);
+
+    console.log("working");
+    res.json({ data: data });
+  } catch (error) {
+    console.log(
+      "some thing went wrong during api call or fetching data ",
+      error
+    );
+    res.status(500).json({ message: "internal server error" });
+  }
+});
 // single User details
 
 router.get("/user/:id", async (req, res) => {
@@ -172,5 +193,37 @@ router.get("/search", async (req, res) => {
     res.status(500).json({ error: "Something went wrong during search" });
   }
 });
+
+// marks as done router
+
+router.put("/user/:id/markdone", async (req, res) => {
+  try {
+    let { id } = req.params;
+    console.log("for marks as done ", id);
+
+    let makeMarksAsDone = await Todos.findOneAndUpdate(
+      { _id: id },
+      {
+        completedStatus: true,
+      }
+    );
+    console.log(makeMarksAsDone);
+    res.status(200).json({ data: makeMarksAsDone });
+  } catch (err) {
+    res.status(500).json({ error: "Something went worng during updation " });
+  }
+});
+
+// router.get("/user/completedTodos", handleLoginCheck, async (req, res) => {
+//   try {
+//     const todos = await Todos.find({
+//       $and: [{ user: req.user.userId }, { completedStatus: false }],
+//     });
+//     consle.log(todos);
+//     res.json(todos);
+//   } catch (err) {
+//     res.status(500).json({ message: "Server Error" });
+//   }
+// });
 
 module.exports = router;

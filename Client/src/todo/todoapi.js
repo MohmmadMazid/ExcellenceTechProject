@@ -31,3 +31,9 @@ export const deleteUserTodo = (id) => API.delete(`/user/${id}`);
 
 // Delete todo as admin
 export const deleteAdminTodo = (id) => API.delete(`/admin/${id}`);
+
+// completed todos ,bringing completed todos of loggedIn User
+
+export const completedTodos = () => API.get("/user/completedTodos");
+// marks as done todo
+export const marksAsDone = (id) => API.put(`/user/${id}/markdone`);

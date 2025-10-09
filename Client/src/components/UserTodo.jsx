@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUserTodos, deleteUserTodo } from "../todo/todoapi";
+import { getUserTodos, deleteUserTodo, marksAsDone } from "../todo/todoapi";
 import { Link } from "react-router-dom";
 import SearchTodo from "./SearchTodo";
 // import TodoForm from "./TodoForm"; // Uncomment if needed
@@ -33,6 +33,11 @@ const UserTodos = () => {
   useEffect(() => {
     fetchTodos();
   }, []);
+
+  const handleMarksDone = (id) => {
+    marksAsDone(id);
+    fetchTodos();
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-6 md:p-8">
@@ -78,13 +83,20 @@ const UserTodos = () => {
               <div className="flex justify-between items-center mt-4">
                 <button
                   onClick={() => handleDelete(todo._id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition"
+                  className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition cursor-pointer"
                 >
                   Delete
                 </button>
+                <button
+                  onClick={() => handleMarksDone(todo._id)}
+                  className="bg-green-600 text-white px-3 py-1 rounded-lg
+                   hover:bg-green-500 transition cursor-pointer"
+                >
+                  Mark As Done
+                </button>
 
                 <Link to={`singleTodo/${todo._id}`}>
-                  <button className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition">
+                  <button className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition cursor-pointer">
                     Check
                   </button>
                 </Link>

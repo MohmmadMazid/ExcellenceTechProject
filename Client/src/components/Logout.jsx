@@ -19,7 +19,7 @@ const LogoutButton = () => {
     <div className="flex justify-end">
       <button
         onClick={handleLogout}
-        className="bg-blue-700 rounded-lg text-white p-2 m-3 hover:bg-blue-800 transition duration-200 "
+        className="bg-blue-700 rounded-lg text-white p-2 m-3 hover:bg-blue-800 transition duration-200 cursor-pointer"
       >
         Logout
       </button>
