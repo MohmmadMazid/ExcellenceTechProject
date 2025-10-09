@@ -18,7 +18,7 @@ const SearchTodo = ({ handleDelete }) => {
 
   return (
     <div className=" rounded-2xl bg-white active:outline-1 active:outline-blue-200">
-      <h1 className="text-2xl sm:text-3xl font-bold text-center mb-8">
+      <h1 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-blue-700">
         Search Todo
       </h1>
 

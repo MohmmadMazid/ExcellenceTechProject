@@ -41,10 +41,6 @@ const UserTodos = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-6 md:p-8">
-      <h2 className="text-2xl sm:text-3xl font-bold text-indigo-600 mb-6 text-center">
-        User Todos
-      </h2>
-
       {/* Optional Todo Form */}
       {/* <div className="max-w-xl mx-auto mb-8">
         <TodoForm onTodoCreated={fetchTodos} />
@@ -57,6 +53,10 @@ const UserTodos = () => {
 
       {/* Todos List */}
       <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-blue-700 mb-6 text-center">
+          User Todos
+        </h2>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {todos.map((todo) => (
             <div

@@ -19,7 +19,7 @@ function App() {
   return (
     <div>
       <ToastContainer />
-      <div>
+      <div className="sticky top-0 z-50">
         <Navbar />
       </div>
 
