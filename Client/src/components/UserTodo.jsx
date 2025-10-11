@@ -32,7 +32,7 @@ const UserTodos = () => {
 
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [todos]);
 
   const handleMarksDone = (id) => {
     marksAsDone(id);

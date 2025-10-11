@@ -38,7 +38,7 @@ function App() {
         <Route path="/completedTodos" element={<DoneTodo />} />
         <Route path="*" element={<h2>404: Page Not Found</h2>} />
       </Routes>
-      <div>
+      <div className="">
         <Footer />
       </div>
     </div>

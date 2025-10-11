@@ -36,9 +36,9 @@ const SingleUser = () => {
   }, []);
   return (
     <div className="min-h-screen min-w-screen flex flex-col justify-start items-center bg-gray-100 ">
-      <div className="mt-10 bg-white p-10 rounded-xl shadow-xl text-xl text-cyan-900">
-        <h1 className="text-center underline underline-offset-6 mb-10">
-          Getting Single User Data
+      <div className=" mt-10 flex flex-col items-center bg-white p-10 rounded-xl shadow-xl text-xl text-cyan-900">
+        <h1 className="text-center underline underline-offset-6 mb-10 text-3xl">
+          Todo Info
         </h1>
         <div className="text-2xl m-2 p-2 ">
           <h2>Title -{todo.title}</h2>
@@ -48,7 +48,7 @@ const SingleUser = () => {
         </div>
         <Link
           to={`/userTodo/update/${todo._id}`}
-          className="ml-16 border-1 rounded-lg p-1 flex flex-row justify-center w-100 bg-blue-700 text-white text-2xl hover:bg-blue-600 cursor-pointer"
+          className="-1 rounded-lg p-1 flex flex-row justify-center w-100 bg-blue-700 text-white text-2xl hover:bg-blue-600 cursor-pointer"
         >
           update
         </Link>
